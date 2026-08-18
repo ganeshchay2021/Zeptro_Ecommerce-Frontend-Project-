@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderImport from "react-slick";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { getData } from '../Context/DataContext';
+import Loading from '../assets/Loading4.webm';
 
 const Slider = SliderImport.default ?? SliderImport;
 
@@ -40,32 +41,38 @@ const HeroCarosal = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    pauseOnHover:true,
+    pauseOnHover: true,
     nextArrow: <SampleNextArrow to="next" />,
     prevArrow: <SamplePrevArrow to="prev" />,
   };
 
   return (
     <section>
-      <Slider {...settings} className="w-full overflow-hidden">
-        {data?.slice(0, 7).map((item) => (   // here is the problen why
-          <div key={item._id} className='bg-linear-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] -z-10'>
-            <div className='h-150 flex justify-between items-center px-5 gap-10 max-w-6xl mx-auto'>
-              <div className='space-y-4'>
-                <p className='text-red-500 text-sm font-semibold font-sans'>Power your dress up with the best product here..!</p>
-                <h1 className='text-4xl text-white max-w-125 line-clamp-3 font-bold uppercase'>{item.title}
-                </h1>
-                <p className='text-gray-300 line-clamp-3 md:max-w-125 pr-7'>{item.description}</p>
-                <button className='bg-linear-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer mt-4'>Shop Now</button>
+      {
+        data?.length > 0 ? (<Slider {...settings} className="w-full overflow-hidden">
+          {data?.sort(() => Math.random() - 0.5).slice(0, 7).map((item) => (
+            <div key={item._id} className='bg-linear-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] -z-10'>
+              <div className='h-150 flex justify-between items-center px-5 gap-10 max-w-6xl mx-auto'>
+                <div className='space-y-4'>
+                  <p className='text-red-500 text-sm font-semibold font-sans'>Your ultimate destination for style, tech, and living..!</p>
+                  <h1 className='text-4xl text-white max-w-125 line-clamp-3 font-bold uppercase'>{item.title}
+                  </h1>
+                  <p className='text-gray-300 line-clamp-3 md:max-w-125 pr-7'>{item.description}</p>
+                  <button className='bg-linear-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer mt-4'>Shop Now</button>
+                </div>
+                <div >
+                  <img src={item.thumbnail} alt="Product" className='h-120 w-120 transition-all hover:rotate-2 duration-400 rounded-full shadow-2xl hover:scale-105 bg-white  shadow-red-400 object-center' />
+                </div>
               </div>
-              <div >
-                <img src={item.image} alt="Product" className='h-120 w-120 transition-all hover:rotate-2 duration-400 rounded-full shadow-2xl hover:scale-105  shadow-red-400 object-center' />
-              </div>
-            </div>
 
-          </div>
-        ))}
-      </Slider>
+            </div>
+          ))}
+        </Slider>) : (<div className='h-screen sm:h-120 flex justify-center items-center'>
+          <video autoPlay muted loop>
+            <source src={Loading} type='video/webm' />
+          </video>
+        </div>)
+      }
     </section>
   );
 };

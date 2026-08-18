@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { FaCaretDown } from 'react-icons/fa';
 import { IoCart, IoCartOutline } from 'react-icons/io5';
 import { Link, NavLink } from 'react-router-dom'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+
 import {
   SignedIn,
   SignedOut,
@@ -16,6 +18,19 @@ const Navbar = ({ location, getLocation,
   openDropdown,
   toggelDropdown }) => {
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDetectLocation = async () => {
+    setIsLoading(true);
+    try {
+      await getLocation();
+    } catch (error) {
+      console.error(error);
+    }
+    setTimeout(async () => {
+      setIsLoading(false);
+    }, 1500)
+  }
 
   return (
     <section className='bg-white shadow-2xl py-3'>
@@ -24,7 +39,7 @@ const Navbar = ({ location, getLocation,
         <div className='flex gap-7 justify-center items-center'>
           <Link to="/" >
             <h1 className='text-3xl font-bold'>
-              <span className='text-red-500 font-serif'>Z</span>aptro
+              <span className='text-red-500 font-serif'>Swift</span>Bazaar
             </h1>
           </Link>
 
@@ -38,7 +53,8 @@ const Navbar = ({ location, getLocation,
             {
               openDropdown && <div className='w-64 shadow-2xl p-4 border-2 bg-white border-gray-100 fixed z-50 rounded-md top-16 left-60'>
                 <h1 className='text-xl flex justify-between items-center'>Change Location <span><CgClose onClick={toggelDropdown} className='cursor-pointer' /> </span></h1>
-                <button className='bg-red-500 text-white w-full py-1 rounded-lg text-xl  hover:bg-red-600 cursor-pointer duration-300 mt-4' onClick={getLocation}>Detect my location</button>
+                <button className='bg-red-500 text-white w-full py-1 flex justify-center items-center rounded-lg text-xl  hover:bg-red-600 cursor-pointer duration-300 mt-4' onClick={handleDetectLocation} disabled={isLoading}>
+                  {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-2xl" /> : "Detect Location"} </button>
               </div>
             }
           </div>
