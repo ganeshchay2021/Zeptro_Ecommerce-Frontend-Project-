@@ -13,12 +13,14 @@ import {
   UserButton,
 } from '@clerk/clerk-react'
 import { CgClose } from 'react-icons/cg';
+import { useCart } from '../Context/CartContext';
 
 const Navbar = ({ location, getLocation,
   openDropdown,
   toggelDropdown }) => {
 
   const [isLoading, setIsLoading] = useState(false);
+  const {cartItem}= useCart();
 
   const handleDetectLocation = async () => {
     setIsLoading(true);
@@ -72,7 +74,7 @@ const Navbar = ({ location, getLocation,
 
           <Link to={"/cart"} className='relative'>
             <IoCartOutline className='h-7 w-7' />
-            <span className='bg-red-500 text-white px-2 rounded-full absolute -top-3 -right-3'>0</span>
+            <span className='bg-red-500 text-white px-2 rounded-full absolute -top-3 -right-3'>{cartItem.length}</span>
           </Link>
 
           <div>

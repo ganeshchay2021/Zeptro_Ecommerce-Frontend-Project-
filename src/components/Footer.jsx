@@ -8,31 +8,31 @@ const Footer = () => {
             <section className='bg-[#101828] py-8'>
                 <div className='max-w-7xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 px-4'>
                     <div className='text-gray-200'>
-                        <h1 className='text-2xl text-red-500 font-semibold mb-2'>Zeptro</h1>
-                        <p className='mb-2 text-sm'>Powering Your World with the Best in Electronics.</p>
+                        <h1 className='text-2xl text-red-500 font-semibold mb-2'>SwiftBazaar</h1>
+                        <p className='mb-2 text-sm'>Upgrade your lifestyle with cutting-edge gadgets,<br /> smart devices, and home essentials.</p>
                         <div className='grid grid-cols-1 text-sm'>
-                            <span>123 Electronics St, Style City, NY 10001</span>
-                            <span>Email: support@Zaptro.com</span>
-                            <span>Phone: (123) 456-7890</span>
+                            <span>Kathmandu-30, Bagmati Pradesh, Mahakabi Marg</span>
+                            <span>Email: support@swiftBazaar.com</span>
+                            <span>Phone: (+977) 9814914914</span>
                         </div>
                     </div>
 
                     <div className=' text-gray-200 grid grid-cols-1 sm:grid-cols-2 gap-15 gap-y-6'>
                         <div className='space-y-2'>
                             <h1 className='text-xl font-semibold'>Customer Service</h1>
-                            <p className='text-sm'>Contact Us</p>
-                            <p className='text-sm'>Shipping & Returns</p>
-                            <p className='text-sm'>FAQs</p>
-                            <p className='text-sm'>Order Tracking</p>
-                            <p className='text-sm'>Size Guide</p>
+                            <p className='text-sm cursor-pointer hover:translate-x-1 hover:text-red-600 duration-200'>Contact Us</p>
+                            <p className='text-sm cursor-pointer hover:translate-x-1 hover:text-red-600 duration-200'>Shipping & Returns</p>
+                            <p className='text-sm cursor-pointer hover:translate-x-1 hover:text-red-600 duration-200'>FAQs</p>
+                            <p className='text-sm cursor-pointer hover:translate-x-1 hover:text-red-600 duration-200'>Order Tracking</p>
+                            <p className='text-sm cursor-pointer hover:translate-x-1 hover:text-red-600 duration-200'>Size Guide</p>
                         </div>
                         <div className='space-y-2 text-gray-200'>
                             <h1 className='text-xl font-semibold'>Follow Us</h1>
                             <div className='flex gap-x-4'>
-                                <FaFacebook />
-                                <FaInstagram />
-                                <FaTwitter />
-                                <FaPinterest />
+                                <FaFacebook className='hover:text-red-500 hover:shadow-2xl hover:shadow-gray-950 hover:scale-150 hover:cursor-pointer transition-all' />
+                                <FaInstagram className='hover:text-red-500 hover:shadow-2xl hover:shadow-gray-950 hover:scale-150 hover:cursor-pointer transition-all' />
+                                <FaTwitter className='hover:text-red-500 hover:shadow-2xl hover:shadow-gray-950 hover:scale-150 hover:cursor-pointer transition-all' />
+                                <FaPinterest className='hover:text-red-500 hover:shadow-2xl hover:shadow-gray-950 hover:scale-150 hover:cursor-pointer transition-all' />
                             </div>
                         </div>
 
@@ -48,10 +48,10 @@ const Footer = () => {
                     </div>
                 </div>
             </section>
-            <hr className='text-gray-600' style={{height:'0.5px'}}/>
+            <hr className='text-gray-600' style={{ height: '0.5px' }} />
             <section className='py-4 bg-[#101828]'>
                 <div className='pb-4 mx-auto flex justify-center items-center text-gray-200'>
-                    <p className='text-sm'>© 2026 <span className='text-red-500'>Zaptro</span>. All rights reserved</p>
+                    <p className='text-sm'>© 2026 <span className='text-red-500'>SwiftBazaar</span>. All rights reserved</p>
                 </div>
             </section>
         </>

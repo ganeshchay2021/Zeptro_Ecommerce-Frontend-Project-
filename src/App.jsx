@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import axios from 'axios'
 import Footer from './components/Footer'
 import PopUpAlert from './components/PopUpAlert'
+import SingleProduct from './components/SingleProduct'
 
 
 const App = () => {
@@ -22,7 +23,6 @@ const App = () => {
   const getLocation = async () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { longitude, latitude } = position.coords;
-      console.log(longitude, latitude);
       const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
 
       try {
@@ -45,9 +45,10 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<Products />} />
+        <Route path='/products/:id' element={<SingleProduct/>} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/cart' element={<Cart />} />
+        <Route path='/cart' element={<Cart location={location} getLocation={getLocation}/>} />
       </Routes>
       <Footer />
     </BrowserRouter>

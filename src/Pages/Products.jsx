@@ -39,18 +39,25 @@ const Products = () => {
 
   const dynamicPage = Math.ceil(filteredData?.length / 8);
 
-
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
+
+  function scrollToTOp(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return (
     <section>
-      <div className='max-w-6xl mx-auto px-4 py-5'>
+      <div className='max-w-6xl mx-auto sm:px-4 px-2 py-5'>
         {
           data?.length > 0 ? (<div className='flex gap-8'>
             <FilterSection data={data} search={search} setSearch={setSearch} category={category} setCategory={setCategory} brand={brand} setBrand={setBrand} priceRange={priceRange} setPriceRange={setPriceRange} handleCategoryChange={handleCategoryChange}
-              handleBrandChange={handleBrandChange} handlePage={handlePage} />
+              handleBrandChange={handleBrandChange} handlePage={handlePage} scrollToTOp={scrollToTOp}/>
             {
               filteredData.length > 0 ? (<div className='place-items-center'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 content-start'>
@@ -62,7 +69,7 @@ const Products = () => {
                     })
                   }
                 </div>
-                <Pagination handlePage={handlePage} page={page} dynamicPage={dynamicPage} />
+                <Pagination handlePage={handlePage} page={page} dynamicPage={dynamicPage}/>
               </div>) : (<div className='w-full flex justify-center pt-20'>
                 <img src={NoProduct} alt="" className='object-cover md:w-120 md:h-120 sm:h-100 sm:w-100 h-80 w-80' />
               </div>)

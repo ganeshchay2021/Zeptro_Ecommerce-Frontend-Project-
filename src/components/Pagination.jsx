@@ -24,9 +24,11 @@ const Pagination = ({ handlePage, page, dynamicPage }) => {
         <div className='mt-10 flex gap-x-2'>
             <button disabled={page === 1} className={`flex justify-center items-center gap-x-2 text-sm text-white px-3 py-1 ${page === 1 ? "bg-red-400" : "bg-red-500"} rounded-md cursor-pointer `} onClick={() => handlePage(page - 1)}><IoIosArrowBack /></button>
             {
-                getPages(page, dynamicPage)?.map((item)=>{
+                getPages(page, dynamicPage)?.map((item, index)=>{
                     return (
-                        <span className={`${item===page? "font-bold text-red-500": "font-semibold"} cursor-pointer`} onClick={()=>typeof item==="number" && handlePage(item)}>{item}</span>
+                        <span key={index} className={`${item===page? "font-bold text-red-500": "font-semibold"} cursor-pointer`} onClick={()=>{
+                            typeof item==="number" && handlePage(item);
+                        }}>{item}</span>
                     )
                 })
             }

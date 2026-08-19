@@ -1,7 +1,7 @@
 import React from 'react'
 import { LuMessageCircleHeart } from 'react-icons/lu'
 
-const PopUpAlert = ({ showDialog, handleDialog }) => {
+const PopUpAlert = ({ showDialog, handleDialog, scrollToTOp }) => {
     return (
         <>
             {
@@ -15,7 +15,10 @@ const PopUpAlert = ({ showDialog, handleDialog }) => {
                         </div>
                         <p className='text-sm text-gray-300'>Thank you for contacting us..!. <br />We'll reach you out immediately </p>
                         <div className='flex justify-end'>
-                            <button className='mt-5 px-4 py-2 text-white bg-red-500 hover:bg-red-600 cursor-pointer transition-all rounded-md' onClick={handleDialog}>cancel</button>
+                            <button className='mt-5 px-4 py-2 text-white bg-red-500 hover:bg-red-600 cursor-pointer transition-all rounded-md' onClick={()=>{
+                                handleDialog();
+                                 scrollToTOp();
+                            }}>cancel</button>
                         </div>
                     </div>
                 </div>

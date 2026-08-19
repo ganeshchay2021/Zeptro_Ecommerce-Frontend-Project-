@@ -16,8 +16,12 @@ const Contact = () => {
     }, 1500);
   }
 
-  const handleDialog = () => {
+  function handleDialog() {
     setShowDialog(false);
+  }
+
+  function scrollToTOp() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   return (
@@ -33,7 +37,7 @@ const Contact = () => {
               <p className="text-gray-300">Have a question or need support? We're here to help you with your electronics journey.</p>
             </div>
             <div>
-              <p><strong>📍 Address:</strong> Bagmati Province, Kathmandu-30, Maitidevi</p>
+              <p><strong>📍 Address:</strong> Kathmandu-30, Bagmati Pradesh, Mahakabi Marg</p>
               <p><strong>📧 Email:</strong> support@swiftBazaar.com</p>
               <p><strong>📞 Phone:</strong> +977-9814914914</p>
             </div>
@@ -61,7 +65,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-      <PopUpAlert showDialog={showDialog} handleDialog={handleDialog} />
+      <PopUpAlert showDialog={showDialog} handleDialog={handleDialog} scrollToTOp={scrollToTOp} />
     </div>
   );
 };

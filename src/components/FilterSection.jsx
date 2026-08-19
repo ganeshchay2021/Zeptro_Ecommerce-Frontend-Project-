@@ -1,7 +1,7 @@
 import React from 'react'
 import { getData } from '../Context/DataContext'
 
-const FilterSection = ({ data, search, setSearch, category, setCategory, brand, setBrand, priceRange, setPriceRange, handleCategoryChange, handleBrandChange, handlePage}) => {
+const FilterSection = ({ data, search, setSearch, category, setCategory, brand, setBrand, priceRange, setPriceRange, handleCategoryChange, handleBrandChange, handlePage, scrollToTOp}) => {
     const { allCategory, allBrands } = getData();
 
     const filterBrands = data?.filter((product) => {
@@ -13,8 +13,6 @@ const FilterSection = ({ data, search, setSearch, category, setCategory, brand, 
         .filter(Boolean);
 
     const brandsFilter = ["All", ...new Set(brandNames)];
-
-    console.log(brandsFilter);
 
 
     return (
@@ -71,6 +69,7 @@ const FilterSection = ({ data, search, setSearch, category, setCategory, brand, 
 
             {/* reset button  */}
             <button className='px-4 py-1 bg-red-500 hover:bg-red-600 text-white mt-5 rounded-md transition-all cursor-pointer' onClick={()=>{
+                scrollToTOp();
                 setBrand("All"); setPriceRange([0, 15000]); setSearch(""); setCategory("All")
             }}>Reset Filters</button>
 
