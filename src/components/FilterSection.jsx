@@ -1,7 +1,7 @@
 import React from 'react'
 import { getData } from '../Context/DataContext'
 
-const FilterSection = ({ data, search, setSearch, category, setCategory, brand, setBrand, priceRange, setPriceRange, handleCategoryChange, handleBrandChange, handlePage, scrollToTOp}) => {
+const FilterSection = ({data, search, setSearch, category, setCategory, brand, setBrand, priceRange, setPriceRange, handleCategoryChange, handleBrandChange, handlePage, scrollToTOp }) => {
     const { allCategory, allBrands } = getData();
 
     const filterBrands = data?.filter((product) => {
@@ -16,7 +16,7 @@ const FilterSection = ({ data, search, setSearch, category, setCategory, brand, 
 
 
     return (
-        <div className='bg-gray-100 rounded-md p-4 h-max'>
+        <div className='bg-gray-100 rounded-md p-4 h-max md:block hidden'>
             <input type="text" placeholder='Search...' className='bg-white border p-2 rounded-md border-gray-400' onChange={(e) => setSearch(e.target.value)} value={search} />
 
             {/* category only data  */}
@@ -68,7 +68,7 @@ const FilterSection = ({ data, search, setSearch, category, setCategory, brand, 
             </div>
 
             {/* reset button  */}
-            <button className='px-4 py-1 bg-red-500 hover:bg-red-600 text-white mt-5 rounded-md transition-all cursor-pointer' onClick={()=>{
+            <button className='px-4 py-1 bg-red-500 hover:bg-red-600 text-white mt-5 rounded-md transition-all cursor-pointer' onClick={() => {
                 scrollToTOp();
                 setBrand("All"); setPriceRange([0, 15000]); setSearch(""); setCategory("All")
             }}>Reset Filters</button>

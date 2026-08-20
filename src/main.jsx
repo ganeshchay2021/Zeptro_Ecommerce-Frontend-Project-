@@ -7,6 +7,7 @@ import './index.css'
 import { DataProvider } from './Context/DataContext.jsx'
 import { CartProvider } from './Context/CartContext.jsx'
 import { ToastContainer } from 'react-toastify'
+import ScrollToTop from 'react-scroll-to-top'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <DataProvider>
         <CartProvider>
           <App />
+          <ScrollToTop smooth color='white' style={{backgroundColor:"red", cursor:"pointer", display:"flex", justifyContent:"center", alignItems:"center"}}/>
           <ToastContainer
             position="bottom-right"
             autoClose={5000}

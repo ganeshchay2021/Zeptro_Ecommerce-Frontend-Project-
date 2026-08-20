@@ -14,13 +14,16 @@ import {
 } from '@clerk/clerk-react'
 import { CgClose } from 'react-icons/cg';
 import { useCart } from '../Context/CartContext';
+import { HiMenuAlt1, HiMenuAlt3 } from 'react-icons/hi';
+import ResponsiveNavBar from './ResponsiveNavBar';
 
 const Navbar = ({ location, getLocation,
   openDropdown,
   toggelDropdown }) => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const {cartItem}= useCart();
+  const { cartItem } = useCart();
+  const [openNavBar, setOpenNavBar] = useState(false);
 
   const handleDetectLocation = async () => {
     setIsLoading(true);
@@ -36,7 +39,7 @@ const Navbar = ({ location, getLocation,
 
   return (
     <section className='bg-white shadow-2xl py-3'>
-      <div className='max-w-6xl mx-auto flex justify-between items-center '>
+      <div className='max-w-6xl mx-auto flex justify-between items-center px-4 '>
         {/* logo section  */}
         <div className='flex gap-7 justify-center items-center'>
           <Link to="/" >
@@ -46,7 +49,7 @@ const Navbar = ({ location, getLocation,
           </Link>
 
           {/* location  */}
-          <div className='flex items-center gap-1 text-gray-700'>
+          <div className='lg:flex items-center gap-1 text-gray-700 hidden'>
             <MapPin className='text-red-500  cursor-pointer' onClick={toggelDropdown} />
             <span className='font-semibold  cursor-pointer' onClick={toggelDropdown}>{location ? <div className='-space-y-2' >
               <p>{location.neighbourhood}</p>
@@ -65,10 +68,10 @@ const Navbar = ({ location, getLocation,
 
         {/* menu section  */}
         <nav className='flex gap-7 items-center'>
-          <ul className='flex gap-7 text-xl font-semibold items-center cursor-pointer'>
+          <ul className='md:flex gap-7 text-xl font-semibold items-center cursor-pointer hidden'>
             <NavLink to="/" className={({ isActive }) => `${isActive ? "border-b-3 border-red-500 duration-200" : "text-black"} hover:border-b-3 border-red-300`}><li>Home</li></NavLink>
             <NavLink to="/products" className={({ isActive }) => `${isActive ? "border-b-3 border-red-500 duration-200" : "text-black"} hover:border-b-3 border-red-300`}><li>Product</li></NavLink>
-            <NavLink to="/about" className={({ isActive }) => `${isActive ? "border-b-3 border-red-500 duration-200" : "text-black"} hover:border-b-3 border-red-300`}><li>About Us</li></NavLink>
+            <NavLink to="/about" className={({ isActive }) => `${isActive ? "border-b-3 border-red-500 duration-200" : "text-black"} hover:border-b-3 border-red-300`}><li>About</li></NavLink>
             <NavLink to="/contact" className={({ isActive }) => `${isActive ? "border-b-3 border-red-500 duration-200" : "text-black"} hover:border-b-3 border-red-300`}><li>Contact</li></NavLink>
           </ul>
 
@@ -77,7 +80,7 @@ const Navbar = ({ location, getLocation,
             <span className='bg-red-500 text-white px-2 rounded-full absolute -top-3 -right-3'>{cartItem.length}</span>
           </Link>
 
-          <div>
+          <div className='hidden md:block'>
             <SignedOut>
               <SignInButton mode="modal" className="bg-red-500 rounded-md text-white cursor-pointer px-4 py-1" />
             </SignedOut>
@@ -85,7 +88,11 @@ const Navbar = ({ location, getLocation,
               <UserButton />
             </SignedIn>
           </div>
+          {
+            openNavBar ? (<HiMenuAlt3 className='h-7 w-7 md:hidden' onClick={() => setOpenNavBar(!openNavBar)} />) : (<HiMenuAlt1 className='h-7 w-7 md:hidden' onClick={() => setOpenNavBar(!openNavBar)} />)
+          }
         </nav>
+        <ResponsiveNavBar setOpenNavBar={setOpenNavBar} openNavBar={openNavBar}/>
       </div>
     </section>
   )

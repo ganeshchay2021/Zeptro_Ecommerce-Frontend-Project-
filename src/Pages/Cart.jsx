@@ -9,10 +9,12 @@ import { GiShoppingBag } from 'react-icons/gi';
 import { useUser } from '@clerk/clerk-react';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = ({ location, getLocation }) => {
   const { cartItem, updatedItemQuantity, deleteItem } = useCart();
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const totalPrice = cartItem.reduce(
@@ -36,40 +38,42 @@ const Cart = ({ location, getLocation }) => {
 
   return (
     <section>
-      <div className='max-w-6xl w-full mx-auto px-4 py-10'>
+      <div className='max-w-6xl w-full mx-auto px-4 md:py-10 py-5 h-full'>
         {
           cartItem.length > 0 ? (<div>
             {/* heading */}
             <h1 className='sm:text-2xl text-xl font-bold'>My Cart({cartItem.length})</h1>
 
-            <div className='mt-10'>
+            <div className='md:mt-10 mt-5'>
               {/* cart products list  */}
               {
                 cartItem?.map((cart) => {
                   return (
                     <div key={cart.id} className='mb-5'>
-                      <div className='bg-gray-100 rounded-lg py-3 px-5 flex justify-between items-center'>
+                      <div className='bg-gray-100 rounded-lg py-3 px-5 flex justify-between items-center md:flex-row flex-col gap-y-2'>
 
-                        <div className='flex gap-4 items-center'>
+                        <div className='flex gap-4 items-center w-full'>
                           <img src={cart.thumbnail} alt={cart.title} className='w-20 h-20 rounded-lg' />
                           <div className='w-75'>
-                            <h1 className='line-clamp-2 font-medium text-gray-800'>{cart.title}</h1>
+                            <h1 className='line-clamp-3 font-medium overflow-clip text-gray-800'>{cart.title}</h1>
                             <h1 className='text-gray-600'>{cart.category}</h1>
                             <h1 className='text-red-500'>${cart.price}</h1>
                           </div>
                         </div>
 
-                        <div className='flex items-center gap-4'>
-                          <button className='bg-red-500 h-7 w-7 flex justify-center items-center rounded-full text-2xl text-white cursor-pointer' onClick={() => updatedItemQuantity(cartItem, cart.id, "decrease")}><FiMinus /></button>
+                        <div className='flex md:gap-x-40 items-center gap-x-20 justify-end w-full'>
+                          <div className='flex items-center gap-4'>
+                            <button className='bg-red-500 h-7 w-7 flex justify-center items-center rounded-full text-2xl text-white cursor-pointer' onClick={() => updatedItemQuantity(cartItem, cart.id, "decrease")}><FiMinus /></button>
 
-                          <span>{cart.quantity}</span>
+                            <span>{cart.quantity}</span>
 
-                          <button className='bg-red-500 h-7 w-7 flex justify-center items-center rounded-full text-2xl text-white cursor-pointer' onClick={() => updatedItemQuantity(cartItem, cart.id, "increase")}><IoIosAdd /></button>
-                        </div>
+                            <button className='bg-red-500 h-7 w-7 flex justify-center items-center rounded-full text-2xl text-white cursor-pointer' onClick={() => updatedItemQuantity(cartItem, cart.id, "increase")}><IoIosAdd /></button>
+                          </div>
 
 
-                        <div className='w-fit p-2 rounded-full hover:shadow-2xl bg-white/60' onClick={() => deleteItem(cart.id)}>
-                          <MdDeleteForever className='text-red-500 text-2xl cursor-pointer' />
+                          <div className='w-fit p-2 rounded-full hover:shadow-2xl bg-white/60' onClick={() => deleteItem(cart.id)}>
+                            <MdDeleteForever className='text-red-500 text-2xl cursor-pointer' />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -167,11 +171,11 @@ const Cart = ({ location, getLocation }) => {
           </div>) : (<div className='max-w-6xl w-full px-4 h-screen flex justify-center items-center'>
             <div className='p-5 place-items-center space-y-3'>
               <BsCart className='text-7xl rotate-24 text-red-400' />
-            <h1 className='text-lg sm:text-xl font-bold text-gray-800'>Your cart is empty!</h1>
-            <p className='text-sm text-center text-gray-600'>Look like you haven't added anythings to your cart yet</p>
-            <div className='flex justify-center'>
-              <button className='bg-red-500 hover:bg-red-600 transition-all self-center px-3 py-1 rounded-md text-white cursor-pointer mt-10'>Start Shopping</button>
-            </div>
+              <h1 className='text-lg sm:text-xl font-bold text-gray-800'>Your cart is empty!</h1>
+              <p className='text-sm text-center text-gray-600'>Look like you haven't added anythings to your cart yet</p>
+              <div className='flex justify-center'>
+                <button className='bg-red-500 hover:bg-red-600 transition-all self-center px-3 py-1 rounded-md text-white cursor-pointer mt-10' onClick={() => navigate('/products')}>Start Shopping</button>
+              </div>
             </div>
           </div>)
         }

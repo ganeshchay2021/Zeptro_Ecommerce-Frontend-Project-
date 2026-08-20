@@ -10,11 +10,15 @@ import axios from 'axios'
 import Footer from './components/Footer'
 import PopUpAlert from './components/PopUpAlert'
 import SingleProduct from './components/SingleProduct'
+import CategoryProduct from './Pages/CategoryProduct'
+import { useCart } from './Context/CartContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 const App = () => {
   const [location, setLocation] = useState();
-   const [openDropdown, setOpenDropdown] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
 
   function toggelDropdown() {
     setOpenDropdown(!openDropdown);
@@ -39,16 +43,18 @@ const App = () => {
   }
 
 
+
   return (
     <BrowserRouter>
       <Navbar location={location} getLocation={getLocation} openDropdown={openDropdown} toggelDropdown={toggelDropdown} />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/products' element={<Products />} />
-        <Route path='/products/:id' element={<SingleProduct/>} />
+        <Route path='/products/:id' element={<SingleProduct />} />
+        <Route path='/category/:category' element={<CategoryProduct />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/cart' element={<Cart location={location} getLocation={getLocation}/>} />
+        <Route path='/cart' element={<ProtectedRoute><Cart location={location} getLocation={getLocation} /></ProtectedRoute>} />
       </Routes>
       <Footer />
     </BrowserRouter>

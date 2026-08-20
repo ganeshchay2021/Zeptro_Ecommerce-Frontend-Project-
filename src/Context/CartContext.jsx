@@ -1,10 +1,37 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
     const [cartItem, setCartItem] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false); 
+
+    // Load cart ONCE
+    useEffect(() => {
+        try {
+            const storedCart = localStorage.getItem("cartItem");
+
+            if (storedCart) {
+                setCartItem(JSON.parse(storedCart));
+            }
+        } catch (error) {
+            console.error("Error loading cart:", error);
+        } finally {
+            setIsLoaded(true);
+        }
+    }, []);
+
+    // Save cart ONLY after initial loading is complete
+    useEffect(() => {
+        if (!isLoaded) return;
+
+        localStorage.setItem(
+            "cartItem",
+            JSON.stringify(cartItem)
+        );
+    }, [cartItem, isLoaded]);
+
 
     const addToCart = (product) => {
         const itemInCart = cartItem.find((item) => item.id === product.id)
@@ -33,7 +60,7 @@ export const CartProvider = ({ children }) => {
                     if (newQuantity > 1) {
                         newQuantity = newQuantity - 1;
                     } else {
-                        toast.error("Quantity can't be less than 0");
+                        toast.error("Quantity can't be less than 1");
                     }
                 }
                 return { ...item, quantity: newQuantity }

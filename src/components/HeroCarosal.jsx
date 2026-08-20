@@ -56,16 +56,16 @@ const HeroCarosal = () => {
           {
             data?.sort(() => Math.random() - 0.5).slice(0, 7).map((item) => (
               <div key={item._id} className='bg-linear-to-r from-[#0f0c29] via-[#302b63] to-[#24243e] -z-10'>
-                <div className='h-150 flex justify-between items-center px-5 gap-10 max-w-6xl mx-auto'>
-                  <div className='space-y-4'>
+                <div className='h-150 flex md:flex-row flex-col-reverse items-center px-5 md:mt-0 mt-10 md:gap-10 gap-5 max-w-6xl mx-auto'>
+                  <div className='space-y-4 flex-1'>
                     <p className='text-red-500 text-sm font-semibold font-sans'>Your ultimate destination for style, tech, and living..!</p>
-                    <h1 className='text-4xl text-white max-w-125 line-clamp-3 font-bold uppercase'>{item.title}
+                    <h1 className='md:text-4xl text-3xl text-white max-w-125 line-clamp-3 font-bold uppercase'>{item.title}
                     </h1>
-                    <p className='text-gray-300 line-clamp-3 md:max-w-125 pr-7'>{item.description}</p>
-                    <button className='bg-linear-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer mt-4' onClick={() => navigate(`/products/${item.id}`)}>Shop Now</button>
+                    <p className='text-gray-300 line-clamp-3 md:max-w-125 w-full pr-7'>{item.description}</p>
+                    <button className='bg-linear-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer md:mt-4 mt-2' onClick={() => navigate(`/products/${item.id}`)}>Shop Now</button>
                   </div>
-                  <div >
-                    <img src={item.thumbnail} alt="Product" className='h-120 w-120 transition-all hover:rotate-2 duration-400 rounded-full shadow-2xl hover:scale-105 bg-white  shadow-red-400 object-center' />
+                  <div  className='flex justify-center items-center flex-1'>
+                    <img src={item.thumbnail} alt="Product" className='lg:h-120 md:h-100 sm:h-80 transition-all shrink hover:rotate-2 duration-400 rounded-full shadow-2xl hover:scale-105 bg-white  shadow-red-400 object-center' />
                   </div>
                 </div>
 
