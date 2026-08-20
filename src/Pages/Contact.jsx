@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PopUpAlert from '../components/PopUpAlert';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 const Contact = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,10 +14,11 @@ const Contact = () => {
     setTimeout(() => {
       setIsLoading(false);
       setShowDialog(true);
+      formRef.current.reset();
     }, 1500);
   }
 
-  function handleDialog() {
+  function handleDialog(e) {
     setShowDialog(false);
   }
 
@@ -44,7 +46,7 @@ const Contact = () => {
           </div>
 
           {/* Form Section */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-white mb-1">Your Name</label>
               <input type="text" placeholder="John Doe" className="w-full px-4 py-2 bg-white/20 border border-white/30 text-white rounded-xl placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" />
